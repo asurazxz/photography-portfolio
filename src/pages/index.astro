@@ -1,0 +1,27 @@
+---
+import PageIntro from "../components/PageIntro.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Denzel Marani | Photography & Videography">
+  <div class="grid gap-16 lg:grid-cols-[1.3fr_0.7fr] lg:items-end">
+    <PageIntro
+      eyebrow="Photography & videography"
+      title="Thoughtful visual stories for people, events, and ideas."
+      description="Denzel Marani creates photography and videography for university clubs, societies, organisations, collaborators, and freelance clients."
+    />
+    <aside class="border-l border-amber-200/50 pl-6 text-stone-300">
+      <p class="font-medium text-white">Selected work is coming soon.</p>
+      <p class="mt-2 leading-7">TODO: Add a featured ImageKit gallery once approved portfolio images are available.</p>
+    </aside>
+  </div>
+
+  <section class="mt-24 border-t border-white/10 pt-10">
+    <p class="text-sm font-medium tracking-[0.18em] text-amber-200 uppercase">Areas of work</p>
+    <div class="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {[
+        "Events", "Portraits", "Studio", "Cosplay", "Videography", "Freelance engagements",
+      ].map((service) => <p class="rounded-sm border border-white/10 px-5 py-6 text-lg text-stone-200">{service}</p>)}
+    </div>
+  </section>
+</BaseLayout>

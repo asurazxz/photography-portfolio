@@ -1,0 +1,19 @@
+---
+import type { GetStaticPaths } from "astro";
+import PageIntro from "../components/PageIntro.astro";
+import { pages } from "../data/pages";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+export const getStaticPaths = (() =>
+  Object.entries(pages).map(([page, details]) => ({ params: { page }, props: details }))) satisfies GetStaticPaths;
+
+const { title, description } = Astro.props;
+---
+
+<BaseLayout title={`${title} | Denzel Marani`} description={description}>
+  <PageIntro eyebrow="Denzel Marani" title={title} description={description} />
+  <section class="mt-20 rounded-sm border border-dashed border-white/20 p-8 text-stone-300">
+    <p class="font-medium text-white">Work collection in preparation.</p>
+    <p class="mt-2 leading-7">TODO: Add curated ImageKit-hosted media and structured metadata for this section.</p>
+  </section>
+</BaseLayout>
