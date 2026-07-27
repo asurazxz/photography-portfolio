@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
+  <title id="title">Event photography placeholder</title>
+  <desc id="description">Abstract architectural event placeholder.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d7d8d7"/>
+      <stop offset="1" stop-color="#8e918f"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <path d="M0 610 290 462l310 148 332-230 308 230 360-174v464H0Z" fill="#555957"/>
+  <path d="M0 680c235-72 372-70 555 0 207 80 358 87 505 23 169-74 318-67 540 17v180H0Z" fill="#222522"/>
+  <g fill="#d7d8d5">
+    <circle cx="280" cy="692" r="22"/><circle cx="340" cy="682" r="22"/>
+    <circle cx="400" cy="700" r="22"/><circle cx="460" cy="687" r="22"/>
+    <circle cx="1140" cy="700" r="22"/><circle cx="1200" cy="686" r="22"/>
+    <circle cx="1260" cy="697" r="22"/>
+  </g>
+  <g fill="#fff" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="5">
+    <text x="68" y="786">EVENT / PUBLICITY</text>
+    <text x="68" y="822" opacity=".56">IMAGE PLACEHOLDER</text>
+  </g>
+</svg>

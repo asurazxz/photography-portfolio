@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 1440" role="img" aria-labelledby="title description">
+  <title id="title">Featured portrait placeholder</title>
+  <desc id="description">Neutral editorial placeholder to be replaced with Denzel Marani's photography.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d9d8d3"/>
+      <stop offset="1" stop-color="#9e9d98"/>
+    </linearGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="4"/>
+      <feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .13 0"/>
+    </filter>
+  </defs>
+  <rect width="1120" height="1440" fill="url(#bg)"/>
+  <ellipse cx="710" cy="505" rx="250" ry="315" fill="#c3c2bd"/>
+  <path d="M275 1440c25-440 203-680 488-680s390 243 357 680H275Z" fill="#75746f"/>
+  <path d="M505 470c50-185 198-260 346-130 12 155-27 294-157 347-128-45-196-122-189-217Z" fill="#b0afa9"/>
+  <rect width="1120" height="1440" filter="url(#grain)" opacity=".46"/>
+  <g fill="#f8f7f4" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="5">
+    <text x="64" y="1340">FEATURED PORTRAIT</text>
+    <text x="64" y="1375" opacity=".58">REPLACE WITH FINAL IMAGE</text>
+  </g>
+</svg>

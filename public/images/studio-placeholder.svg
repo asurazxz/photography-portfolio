@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1600" role="img" aria-labelledby="title description">
+  <title id="title">Studio photography placeholder</title>
+  <desc id="description">Abstract monochrome studio portrait placeholder.</desc>
+  <defs>
+    <radialGradient id="light" cx=".55" cy=".38" r=".62">
+      <stop offset="0" stop-color="#eceae4"/>
+      <stop offset=".5" stop-color="#aaa9a4"/>
+      <stop offset="1" stop-color="#343431"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="1600" fill="url(#light)"/>
+  <ellipse cx="640" cy="580" rx="275" ry="350" fill="#b8b7b2" opacity=".82"/>
+  <path d="M212 1600c80-420 245-636 495-636 274 0 432 232 493 636H212Z" fill="#4a4a47"/>
+  <rect x="64" y="64" width="1072" height="1472" fill="none" stroke="#f8f7f4" stroke-opacity=".22"/>
+  <g fill="#fff" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="5">
+    <text x="90" y="1460">STUDIO / CREATIVE</text>
+    <text x="90" y="1496" opacity=".56">IMAGE PLACEHOLDER</text>
+  </g>
+</svg>

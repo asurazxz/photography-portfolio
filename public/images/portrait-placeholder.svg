@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" role="img" aria-labelledby="title description">
+  <title id="title">Portrait and cosplay placeholder</title>
+  <desc id="description">Abstract blue and neutral portrait placeholder.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#25282d"/>
+      <stop offset=".55" stop-color="#74777a"/>
+      <stop offset="1" stop-color="#d0cfca"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1100" fill="url(#bg)"/>
+  <circle cx="930" cy="420" r="230" fill="#a9a9a5"/>
+  <path d="M530 1100c28-355 192-527 430-527 265 0 410 195 425 527H530Z" fill="#383c42"/>
+  <path d="M0 0h18v1100H0z" fill="#0047ab"/>
+  <circle cx="70" cy="70" r="10" fill="#0047ab"/>
+  <circle cx="100" cy="70" r="10" fill="#d21f16"/>
+  <g fill="#fff" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="5">
+    <text x="70" y="1000">PORTRAIT / COSPLAY</text>
+    <text x="70" y="1036" opacity=".56">IMAGE PLACEHOLDER</text>
+  </g>
+</svg>

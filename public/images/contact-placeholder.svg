@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1250" role="img" aria-labelledby="title description">
+  <title id="title">Closing portfolio image placeholder</title>
+  <desc id="description">Abstract dark editorial placeholder for a final portfolio image.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#151514"/>
+      <stop offset=".55" stop-color="#4f504d"/>
+      <stop offset="1" stop-color="#aaa9a3"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="1250" fill="url(#bg)"/>
+  <rect x="85" y="85" width="830" height="1080" fill="none" stroke="#f8f7f4" stroke-opacity=".18"/>
+  <circle cx="690" cy="440" r="180" fill="#bbb9b2" opacity=".5"/>
+  <path d="M180 1250c73-330 244-521 500-521 176 0 283 79 320 176v345H180Z" fill="#20211f"/>
+  <g fill="#fff" font-family="Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="5">
+    <text x="115" y="1090">CLOSING FRAME</text>
+    <text x="115" y="1126" opacity=".56">REPLACE WITH FINAL IMAGE</text>
+  </g>
+</svg>
