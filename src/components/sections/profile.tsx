@@ -12,7 +12,7 @@ export function Profile() {
         <Reveal className="profile-heading">
           <p className="eyebrow">Practice / Profile</p>
           <h2 id="profile-title">
-            Experience,
+            Memories,
             <br />
             <em>clearly framed.</em>
           </h2>
@@ -54,16 +54,16 @@ export function Profile() {
             <div className="about-grid">
               <div className="about-copy">
                 <p className="about-lead">
-                  I am a Singapore-based freelance and hobbyist photographer
-                  interested in how people, purpose, and atmosphere come
-                  together in a frame.
+                  I am an aspiring Singapore-based freelance and hobbyist
+                  photographer who is always looking for ways to capture
+                  everyday emotions in stills.
                 </p>
                 <p>
-                  My background began in school media and publicity from 2018
-                  to 2023, followed by photography work with the Digital and
-                  Intelligence Service Information Centre during NDP25. I now
-                  develop portrait and cosplay work alongside my studies in
-                  Information Systems at SMU.
+                  My love for photography began in school media and publicity
+                  from 2018 to 2023, followed by photography work with the
+                  Digital and Intelligence Service Information Centre during
+                  NDP25. I now develop portrait and cosplay work alongside my
+                  studies in Information Systems at SMU.
                 </p>
               </div>
               <div className="skills-panel">

@@ -368,7 +368,7 @@ export const portfolioContent = {
       id: "03",
       title: "Cosplay",
       description:
-        "Character-led sessions developed around costume, performance, location, and creative collaboration.",
+        "Character-led sessions developed around intentional concept, mood, and creative collaboration.",
     },
   ],
   secondaryInterests: [

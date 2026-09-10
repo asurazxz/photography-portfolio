@@ -40,7 +40,8 @@ report.*.json
 .DS_Store
 Thumbs.db
 
-# Private design and agent context
+# Private, device-specific design and agent state. Shared agent context belongs
+# in the tracked AGENTS.md and docs/agent/ files.
 .agents/
 .codex/
 .kombai/

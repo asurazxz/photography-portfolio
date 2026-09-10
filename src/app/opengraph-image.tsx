@@ -54,9 +54,9 @@ export default function OpenGraphImage() {
               maxWidth: 900,
             }}
           >
-            Capture persona,
+            Moments in life,
             <br />
-            not just profile.
+            through my eyes.
           </span>
         </div>
         <div style={{ display: "flex", gap: 12 }}>

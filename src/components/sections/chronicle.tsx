@@ -14,10 +14,7 @@ export function Chronicle() {
         </span>
         <div>
           <p className="eyebrow">Curated portfolio</p>
-          <p>
-            A developing body of work spanning people, publicity, and personal
-            observation.
-          </p>
+          <p>Spotlight of my favourite works.</p>
         </div>
       </Reveal>
       <div className="archive-grid">

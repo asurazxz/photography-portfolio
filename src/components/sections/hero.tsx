@@ -14,15 +14,14 @@ export function Hero() {
         </Reveal>
         <Reveal className="hero-statement" delay={100}>
           <h1 id="hero-title">
-            Capture
+            Moments
             <br />
-            persona
+            in life,
             <br />
-            <em>not just profile.</em>
+            <em>through my eyes.</em>
           </h1>
           <p className="hero-intro">
-            A Singapore-based photographer documenting people, performances,
-            organizations, and the details between them.
+            Capturing memories and emotion in every moment.
           </p>
         </Reveal>
       </div>
