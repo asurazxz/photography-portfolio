@@ -1,3 +1,4 @@
+import { HeaderHeightSync } from "@/components/layout/header-height-sync";
 import { MobileMenu } from "@/components/layout/mobile-menu";
 import { siteNavigation } from "@/config/navigation";
 
@@ -15,6 +16,7 @@ export function SiteHeader() {
         ))}
       </nav>
       <MobileMenu />
+      <HeaderHeightSync />
     </header>
   );
 }

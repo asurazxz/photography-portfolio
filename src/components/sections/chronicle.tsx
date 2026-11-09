@@ -1,4 +1,4 @@
-import { ArchiveCard } from "@/components/sections/archive-card";
+import { ChronicleGrid } from "@/components/sections/chronicle-grid";
 import { Reveal } from "@/components/ui/reveal";
 import { portfolioContent } from "@/content/portfolio";
 
@@ -17,17 +17,7 @@ export function Chronicle() {
           <p>Spotlight of my favourite works.</p>
         </div>
       </Reveal>
-      <div className="archive-grid">
-        {portfolioContent.chronicle.map((item, index) => (
-          <Reveal
-            className={`archive-slot archive-slot-${index + 1}`}
-            delay={index * 80}
-            key={item.id}
-          >
-            <ArchiveCard item={item} index={index} />
-          </Reveal>
-        ))}
-      </div>
+      <ChronicleGrid items={portfolioContent.chronicle} />
       <Reveal className="archive-cta">
         <p>
           The complete index holds every current series and can be filtered by

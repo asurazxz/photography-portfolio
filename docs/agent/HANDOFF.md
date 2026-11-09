@@ -1,62 +1,60 @@
 # Current handoff
 
-Updated: 2026-08-02
-Branch observed: `main`
-Base commit observed: `c8acd3b` (`scaffold done`)
+Updated: 2026-11-10
+Branch observed: `design-2`
+Base commit observed: `de2ebd9` (`minor tweaks + documentation`)
 
 ## Current state
 
-The Windows workspace was audited and cleaned. Reproducible dependency, build,
-and TypeScript-generated files were removed, then regenerated from
-`pnpm-lock.yaml` with pnpm 11.9.0. Empty local `.agents/` and `.codex/`
-directories were removed.
+A full UI review and the follow-up design pass are complete. The changes are
+on `design-2`; the user is committing and pushing them. Details are in
+`sessions/2026-11-10-ui-review-fixes.md`, and the durable rules are in the
+2026-11-10 entries of `DECISIONS.md`.
 
-`.stignore` now excludes dependencies, generated output, test artifacts, logs,
-Git metadata, Vercel linkage, and device-specific agent/editor state. Existing
-ignored directories on another Syncthing device may need one local cleanup;
-adding an ignore rule does not necessarily delete an already-synchronized copy.
+What the site now does:
 
-The original Kombai canvas in `.kombai/` and two design-reference PDFs in
-`user-context/` were preserved because they are non-reproducible source
-material. Git ignores both directories.
+- **Lightbox:** every Chronicle and Complete Index photo opens full size. It
+  morphs from its thumbnail via View Transitions and supports arrows, Escape,
+  and click-outside. Code: `src/components/ui/lightbox.tsx`, `photo-morph.ts`.
+- **Complete Index:** the sticky filter bar works (`overflow-x: clip`). The
+  index shows 12 works at a time with "Show more". Choosing a filter scrolls
+  back to the top of the section.
+- **Profile:** ordered About me (with a portrait placeholder), Main
+  specialisations, Past experience.
+- **Hero:** visible on first paint, with a single "Get in touch" action. The
+  footer carries the contact links.
+- **Design:** no italics; tokenised type (`--text-body`, `--text-section`,
+  `--text-meta`, `--text-label`, nothing under 12px); tighter section
+  spacing; the CHRONICLE title is full contrast.
+- **Motion:** tokens; photos "develop"; crop marks on hover and focus; reveals
+  hide content only when JS runs; reduced motion is respected.
+- **Anchors:** land flush below the header via `--header-height`.
 
-The local development server is running at `http://127.0.0.1:3000` and was
-observed on Windows process ID `10688`. That PID is ephemeral; verify the port
-before relying on it in a later session. The server uses fallback fonts when
-the sandbox blocks Google Fonts, while the verified production build includes
-the configured font assets.
-
-PowerShell blocks `pnpm.ps1` on this desktop. Use `pnpm.cmd`, which preserves the
-current execution policy:
-
-```powershell
-pnpm.cmd install --frozen-lockfile
-pnpm.cmd dev
-```
-
-The portfolio's pre-existing uncommitted source changes and untracked
-`public/media/` caption JSON files remain intact.
+On this Windows desktop, use `pnpm.cmd` because PowerShell blocks `pnpm.ps1`.
 
 ## Verification
 
-- Frozen-lockfile install completed: 352 packages, pnpm 11.9.0.
-- `pnpm.cmd lint` passed.
-- `pnpm.cmd typecheck` passed.
-- `pnpm.cmd build` passed after allowing the configured Google Font downloads.
-- `http://127.0.0.1:3000` returned HTTP 200 with expected hero content.
-- Browser verification found meaningful content, no Next.js error overlay, all
-  expected navigation and portfolio sections, and zero horizontal overflow at
-  the verification viewport.
-- The lockfile did not change.
+- `pnpm.cmd typecheck` and `pnpm.cmd build` pass.
+- `pnpm.cmd lint` fails with 3 `react/no-unescaped-entities` errors. All
+  three are apostrophes in the user's own About copy (`profile.tsx`, lines
+  48-50); the rest of the codebase lints clean.
+- Behaviour was checked in the browser at 1440x900 and 390x844, plus 800px
+  for the About layout. The session record lists the measurements.
+- Not checked: Safari, Firefox, real touch devices, and reduced-motion
+  emulation.
 
 ## Next actions
 
-1. Open `http://127.0.0.1:3000` on this Windows desktop while the process is
-   running.
-2. Stop the local server when finished with `Stop-Process -Id 10688`, after
-   confirming that PID still owns port 3000.
-3. Review and commit the pending portfolio, documentation, and Syncthing files
-   when requested.
-4. Replace placeholder metadata as final images and captions are supplied.
-
-No files were staged or committed during this session.
+1. Escape the apostrophes in `profile.tsx` lines 48-50 (`&apos;` or a
+   `{"..."}` string), so that `pnpm lint` passes.
+2. Replace the About me portrait: save the photo in `public/images/`, then
+   update `aboutPortrait` (src, width, height, alt) in `src/content/portfolio.ts`.
+3. Remaining review items:
+   - Escape and a focus trap for the mobile menu.
+   - A 44px Menu touch target.
+   - Nav active-section state.
+   - Removing dead light-theme CSS from `globals.css`.
+   - Explaining or removing the OBS/WLD/AIR/NIT interest codes.
+   - Optionally top-aligning the Inquiry copy.
+4. Replace placeholder images, plates, and captions when final photographs
+   arrive.

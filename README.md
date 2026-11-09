@@ -11,13 +11,20 @@ captions, and credits can be added without changing the page components.
 
 - Dark editorial design with responsive asymmetric layouts
 - Curated six-image Chronicle
-- Profile with specialisations, background, skills, and experience
-- Direct email and Instagram contact links
-- Forty-slot Complete Index with category filters
+- Profile with an About me portrait, background, skills, specialisations, and
+  experience
+- Direct email and Instagram contact links, repeated in the footer
+- Forty-slot Complete Index with category filters, shown twelve at a time
+- Full-size lightbox for every photo, with keyboard navigation and a
+  shared-element morph from the thumbnail (View Transitions)
+- Photography-specific motion: photos "develop" into full tone, and
+  viewfinder crop marks appear on hover and focus
 - Local images rendered through `next/image`
-- Optimized Inter and Lora typography through `next/font`
+- Optimized Inter and Lora typography through `next/font`, on a tokenised type
+  scale
 - Semantic landmarks, visible keyboard focus, and descriptive alternative text
-- Reduced-motion support for reveal and parallax effects
+- Content stays visible without JavaScript; reduced-motion support for all
+  reveal, parallax, develop, and morph effects
 - Generated favicon, Open Graph image, and search metadata
 - Static production output suitable for Vercel
 
@@ -152,6 +159,10 @@ To replace a placeholder:
    intrinsic `height`, and descriptive `alt` text.
 3. Add `credit` metadata when attribution is required.
 4. Run `pnpm typecheck` and `pnpm build`.
+
+The About me portrait is `aboutPortrait` in the same file. It currently points
+to `public/images/about-portrait-placeholder.svg`; replace it with a 4:5
+portrait.
 
 The first six records form the Chronicle. The Complete Index contains ten slots
 for each category:

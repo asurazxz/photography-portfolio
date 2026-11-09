@@ -1,5 +1,6 @@
+import Image from "next/image";
 import { Reveal } from "@/components/ui/reveal";
-import { portfolioContent } from "@/content/portfolio";
+import { aboutPortrait, portfolioContent } from "@/content/portfolio";
 
 export function Profile() {
   return (
@@ -14,44 +15,29 @@ export function Profile() {
           <h2 id="profile-title">
             Memories,
             <br />
-            <em>clearly framed.</em>
+            <span>clearly framed.</span>
           </h2>
         </Reveal>
-
-        <section
-          className="profile-block specializations"
-          aria-labelledby="specializations-title"
-        >
-          <Reveal>
-            <div className="block-heading">
-              <span>01</span>
-              <div>
-                <p className="eyebrow">Primary disciplines</p>
-                <h3 id="specializations-title">Main specialisations</h3>
-              </div>
-            </div>
-            <div className="specialization-grid">
-              {portfolioContent.specializations.map((item) => (
-                <article className="specialization" key={item.id}>
-                  <span aria-hidden="true">{item.id}</span>
-                  <h4>{item.title}</h4>
-                  <p>{item.description}</p>
-                </article>
-              ))}
-            </div>
-          </Reveal>
-        </section>
 
         <section className="profile-block about-me" aria-labelledby="about-me-title">
           <Reveal>
             <div className="block-heading">
-              <span>02</span>
+              <span>01</span>
               <div>
                 <p className="eyebrow">Background / Capabilities</p>
                 <h3 id="about-me-title">About me</h3>
               </div>
             </div>
             <div className="about-grid">
+              <figure className="about-portrait">
+                <Image
+                  src={aboutPortrait.src}
+                  alt={aboutPortrait.alt}
+                  fill
+                  sizes="(max-width: 720px) 22rem, 40vw"
+                />
+              </figure>
+              <div className="about-body">
               <div className="about-copy">
                 <p className="about-lead">
                   I am an aspiring Singapore-based freelance and hobbyist
@@ -59,13 +45,15 @@ export function Profile() {
                   everyday emotions in stills.
                 </p>
                 <p>
-                  My love for photography began in school media and publicity
-                  from 2018 to 2023, followed by photography work with the
-                  Digital and Intelligence Service Information Centre during
-                  NDP25. I now develop portrait and cosplay work alongside my
-                  studies in Information Systems at SMU.
+                  My love for photography began in secondary school (Maris Stella), where I was part of the Student Council's Corporate Communications committee.
+                  <br/>
+                  Upon entering Junior College (St. Andrew's), I joined the Student Council's Media and Publicity Committee, where my passion for photography took a leap and flourished.
+                  <br/><br/>
+                  More recently, I was under the Digital and Intelligence Service (DIS) Information Centre, and engaged in Media Ops for NDP25.
+                  Now, I do freelance photography, and as a hobby in my free time!
                 </p>
               </div>
+              <div className="about-details">
               <div className="skills-panel">
                 <p className="eyebrow">Technical skills</p>
                 <div className="skill-groups">
@@ -92,6 +80,32 @@ export function Profile() {
                   ))}
                 </dl>
               </aside>
+              </div>
+              </div>
+            </div>
+          </Reveal>
+        </section>
+
+        <section
+          className="profile-block specializations"
+          aria-labelledby="specializations-title"
+        >
+          <Reveal>
+            <div className="block-heading">
+              <span>02</span>
+              <div>
+                <p className="eyebrow">Primary disciplines</p>
+                <h3 id="specializations-title">Main specialisations</h3>
+              </div>
+            </div>
+            <div className="specialization-grid">
+              {portfolioContent.specializations.map((item) => (
+                <article className="specialization" key={item.id}>
+                  <span aria-hidden="true">{item.id}</span>
+                  <h4>{item.title}</h4>
+                  <p>{item.description}</p>
+                </article>
+              ))}
             </div>
           </Reveal>
         </section>

@@ -16,10 +16,14 @@
   box-sizing: border-box;
 }
 
+/* `clip` rather than `hidden`: `hidden` turns body into a scroll container,
+   which silently disables `position: sticky` everywhere below it. */
 html {
-  overflow-x: hidden;
+  overflow-x: clip;
   scroll-behavior: smooth;
-  scroll-padding-top: 7rem;
+  /* Land sections flush under the fixed header; the extra 1px tucks each
+     section's top border beneath the header's own border. */
+  scroll-padding-top: calc(var(--header-height, 7.5rem) - 1px);
 }
 
 body {
@@ -28,7 +32,7 @@ body {
   font-family: var(--font-sans);
   margin: 0;
   min-width: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -91,12 +95,11 @@ a {
 }
 
 .section-space {
-  padding-block: clamp(7rem, 13vw, 13rem);
+  padding-block: clamp(4.5rem, 8vw, 8rem);
 }
 
 .eyebrow {
-  font-size: 0.65rem;
-  font-style: italic;
+  font-size: var(--text-meta);
   font-weight: 700;
   letter-spacing: 0.28em;
   margin: 0;
@@ -126,7 +129,6 @@ a {
   color: white;
   font-family: var(--font-serif);
   font-size: clamp(1rem, 1.7vw, 1.5rem);
-  font-style: italic;
   font-weight: 600;
   letter-spacing: -0.05em;
   text-transform: uppercase;
@@ -139,11 +141,11 @@ a {
 
 .desktop-navigation a {
   color: white;
-  font-size: 0.64rem;
+  font-size: var(--text-label);
   font-weight: 800;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  transition: opacity 220ms ease;
+  transition: opacity var(--motion-fast) ease;
 }
 
 .desktop-navigation a:hover {
@@ -183,7 +185,7 @@ a {
 }
 
 .identity-rule span {
-  font-size: 0.65rem;
+  font-size: var(--text-label);
   font-weight: 800;
   letter-spacing: 0.17em;
   text-transform: uppercase;
@@ -202,7 +204,7 @@ a {
   margin: 0 0 2.5rem;
 }
 
-.hero h1 em {
+.hero h1 span {
   color: #7b7a75;
   font-weight: 400;
 }
@@ -220,7 +222,7 @@ a {
   align-items: center;
   border-radius: 999px;
   display: inline-flex;
-  font-size: 0.61rem;
+  font-size: var(--text-label);
   font-weight: 800;
   justify-content: center;
   letter-spacing: 0.18em;
@@ -228,9 +230,9 @@ a {
   padding-inline: 2rem;
   text-transform: uppercase;
   transition:
-    background 220ms ease,
-    color 220ms ease,
-    transform 220ms ease;
+    background var(--motion-fast) ease,
+    color var(--motion-fast) ease,
+    transform var(--motion-fast) ease;
 }
 
 .button:hover {
@@ -294,25 +296,6 @@ a {
   background: var(--red);
 }
 
-.plate-overlay {
-  bottom: clamp(1.4rem, 4vw, 3.4rem);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  font-size: 0.57rem;
-  letter-spacing: 0.15em;
-  mix-blend-mode: difference;
-  position: absolute;
-  right: clamp(1.4rem, 4vw, 3.4rem);
-  text-align: right;
-  text-transform: uppercase;
-}
-
-.plate-overlay span {
-  font-style: italic;
-  opacity: 0.65;
-}
-
 .credentials {
   background: var(--paper-bright);
   border-bottom: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
@@ -331,8 +314,7 @@ a {
   align-items: center;
   color: #66655f;
   display: flex;
-  font-size: 0.63rem;
-  font-style: italic;
+  font-size: var(--text-label);
   font-weight: 800;
   letter-spacing: 0.32em;
   text-transform: uppercase;
@@ -356,7 +338,7 @@ a {
   border-bottom: 1px solid color-mix(in srgb, var(--ink) 11%, transparent);
   display: flex;
   justify-content: space-between;
-  margin-bottom: clamp(6rem, 10vw, 10rem);
+  margin-bottom: clamp(3.5rem, 6vw, 6rem);
   padding-bottom: 3rem;
 }
 
@@ -364,8 +346,7 @@ a {
   color: color-mix(in srgb, var(--ink) 9%, transparent);
   display: block;
   font-family: var(--font-serif);
-  font-size: clamp(4.2rem, 9vw, 9rem);
-  font-style: italic;
+  font-size: clamp(3rem, 6.25vw, 6rem);
   font-weight: 400;
   letter-spacing: -0.08em;
   line-height: 0.75;
@@ -381,7 +362,7 @@ a {
 .section-intro > div > p:last-child {
   color: var(--muted);
   font-family: var(--font-serif);
-  font-size: 1rem;
+  font-size: var(--text-body);
   line-height: 1.6;
   margin: 0.8rem 0 0;
 }
@@ -437,14 +418,14 @@ a {
 .archive-card-4 .archive-image {
   aspect-ratio: 1;
   filter: grayscale(1);
-  transition: filter 500ms ease;
+  transition: filter var(--motion-medium) ease;
 }
 
 .archive-image img {
   object-fit: cover;
   transition:
-    filter 700ms ease,
-    transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+    filter var(--motion-slow) ease,
+    transform var(--motion-slow) var(--ease-out);
 }
 
 .archive-card-2 .archive-image img {
@@ -469,7 +450,7 @@ a {
 
 .archive-category,
 .archive-plate {
-  font-size: 0.57rem;
+  font-size: var(--text-label);
   font-weight: 800;
   letter-spacing: 0.15em;
   margin: 0;
@@ -491,11 +472,6 @@ a {
   letter-spacing: -0.045em;
   line-height: 1.1;
   margin: 0.55rem 0 1rem;
-}
-
-.archive-card-1 .archive-copy h3,
-.archive-card-4 .archive-copy h3 {
-  font-style: italic;
 }
 
 .archive-description {
@@ -573,7 +549,6 @@ a {
   display: inline-block;
   font-family: var(--font-serif);
   font-size: clamp(1.6rem, 2.5vw, 2.3rem);
-  font-style: italic;
   font-weight: 400;
   letter-spacing: -0.045em;
   margin: 1.3rem 0 1.2rem;
@@ -597,7 +572,7 @@ a {
 
 .secondary-matrix h3 {
   color: var(--blue);
-  font-size: 0.59rem;
+  font-size: var(--text-label);
   letter-spacing: 0.18em;
   margin: 0 0 2.5rem;
   text-transform: uppercase;
@@ -625,7 +600,7 @@ a {
 }
 
 .secondary-matrix dd {
-  font-size: 0.54rem;
+  font-size: var(--text-label);
   font-weight: 800;
   margin: 0;
 }
@@ -644,7 +619,7 @@ a {
 
 .timeline-tag {
   color: #66655f;
-  font-size: 0.54rem;
+  font-size: var(--text-label);
   font-weight: 800;
   height: max-content;
   letter-spacing: 0.16em;
@@ -660,7 +635,7 @@ a {
 
 .timeline-entry > div > p:first-child {
   color: #66655f;
-  font-size: 0.59rem;
+  font-size: var(--text-label);
   font-weight: 800;
   letter-spacing: 0.08em;
   margin: 0 0 1rem;
@@ -677,18 +652,6 @@ a {
   letter-spacing: -0.05em;
   line-height: 1;
   margin: 0;
-  transition: font-style 200ms ease;
-}
-
-.timeline-entry:hover h3 {
-  font-style: italic;
-}
-
-.timeline-entry > div > p:last-child {
-  color: var(--muted);
-  font-size: 0.82rem;
-  line-height: 1.7;
-  margin: 1.5rem 0 0;
 }
 
 .proficiency-card {
@@ -700,7 +663,7 @@ a {
 }
 
 .proficiency-card h3 {
-  font-size: 0.59rem;
+  font-size: var(--text-label);
   letter-spacing: 0.18em;
   margin: 0 0 1.5rem;
   text-transform: uppercase;
@@ -718,8 +681,7 @@ a {
 
 .proficiency-card li {
   color: #66655f;
-  font-size: 0.61rem;
-  font-style: italic;
+  font-size: var(--text-label);
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -739,7 +701,7 @@ a {
 .proficiency-card p span {
   color: #66655f;
   font-family: var(--font-sans);
-  font-size: 0.54rem;
+  font-size: var(--text-label);
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -760,7 +722,7 @@ a {
 .image-status {
   bottom: 1.5rem;
   color: white;
-  font-size: 0.56rem;
+  font-size: var(--text-label);
   font-weight: 700;
   left: 1.5rem;
   letter-spacing: 0.18em;
@@ -777,7 +739,6 @@ a {
 .philosophy-copy h2 {
   font-family: var(--font-serif);
   font-size: clamp(2.7rem, 5vw, 5.6rem);
-  font-style: italic;
   font-weight: 400;
   letter-spacing: -0.065em;
   line-height: 1;
@@ -814,14 +775,14 @@ a {
 
 .contact h2 {
   font-family: var(--font-serif);
-  font-size: clamp(4rem, 8vw, 8.5rem);
+  font-size: var(--text-section);
   font-weight: 400;
   letter-spacing: -0.075em;
   line-height: 0.87;
   margin: 0;
 }
 
-.contact h2 em {
+.contact h2 span {
   color: #777671;
   font-weight: 400;
 }
@@ -843,21 +804,21 @@ a {
   border-bottom: 1px solid #353532;
   display: grid;
   gap: 1.5rem;
-  grid-template-columns: 6rem minmax(9rem, 1fr) auto;
+  grid-template-columns: minmax(9rem, 1fr) auto;
   padding-block: 1.7rem;
-  transition: padding 250ms ease;
 }
 
-.contact-links a:hover {
-  padding-inline: 0.8rem;
+/* Animate transform, not padding, so hover never triggers layout. */
+.contact-links a > * {
+  transition: transform var(--motion-medium) var(--ease-out);
 }
 
-.contact-links span {
-  color: #9a9994;
-  font-size: 0.54rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+.contact-links a:is(:hover, :focus-visible) > strong {
+  transform: translateX(0.8rem);
+}
+
+.contact-links a:is(:hover, :focus-visible) > .contact-value {
+  transform: translateX(-0.8rem);
 }
 
 .contact-links strong {
@@ -866,28 +827,14 @@ a {
   font-weight: 400;
 }
 
-.contact-links em {
+.contact-value {
   color: #aaa9a5;
-  font-size: 0.72rem;
+  font-size: 1rem;
 }
 
 .contact-image {
   aspect-ratio: 4 / 5;
   position: relative;
-}
-
-.contact-image-caption {
-  bottom: 1.5rem;
-  display: flex;
-  font-size: 0.54rem;
-  font-weight: 700;
-  justify-content: space-between;
-  left: 1.5rem;
-  letter-spacing: 0.12em;
-  mix-blend-mode: difference;
-  position: absolute;
-  right: 1.5rem;
-  text-transform: uppercase;
 }
 
 .site-footer {
@@ -904,7 +851,6 @@ a {
 .footer-brand strong {
   font-family: var(--font-serif);
   font-size: 1.45rem;
-  font-style: italic;
   font-weight: 500;
   letter-spacing: -0.05em;
   text-transform: uppercase;
@@ -914,7 +860,7 @@ a {
 .footer-meta p,
 .site-footer > a {
   color: #aaa9a5;
-  font-size: 0.56rem;
+  font-size: var(--text-label);
   font-weight: 700;
   letter-spacing: 0.16em;
   line-height: 1.7;
@@ -925,15 +871,21 @@ a {
   color: white;
 }
 
-.reveal {
+/* Only hidden when JS has run (see layout.tsx), so no-JS visitors see everything. */
+.js .reveal {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(16px);
   transition:
-    opacity 900ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay),
-    transform 900ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay);
+    opacity var(--motion-slow) var(--ease-out) var(--reveal-delay),
+    transform var(--motion-slow) var(--ease-out) var(--reveal-delay);
 }
 
-.reveal.is-visible {
+/* Blocks with photos only fade; the photo's own "develop" carries the motion. */
+.js .reveal:has(img) {
+  transform: none;
+}
+
+.js .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -1012,7 +964,7 @@ a {
     color: white;
     display: flex;
     font: inherit;
-    font-size: 0.62rem;
+    font-size: var(--text-label);
     font-weight: 800;
     gap: 0.8rem;
     letter-spacing: 0.18em;
@@ -1038,9 +990,9 @@ a {
     position: fixed;
     transform: translateY(-1rem);
     transition:
-      opacity 280ms ease,
-      transform 280ms ease,
-      visibility 0s linear 280ms;
+      opacity var(--motion-fast) ease,
+      transform var(--motion-fast) ease,
+      visibility 0s linear var(--motion-fast);
     visibility: hidden;
     z-index: -1;
   }
@@ -1077,12 +1029,12 @@ a {
   .mobile-navigation nav a span {
     color: #aaa9a5;
     font-family: var(--font-sans);
-    font-size: 0.55rem;
+    font-size: var(--text-label);
     letter-spacing: 0;
   }
 
   .mobile-menu-location {
-    font-size: 0.58rem;
+    font-size: var(--text-label);
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -1195,7 +1147,7 @@ a {
     transition-duration: 0.01ms !important;
   }
 
-  .reveal {
+  .js .reveal {
     opacity: 1;
     transform: none;
   }
@@ -1218,6 +1170,16 @@ a {
   --blue: #6c8cff;
   --red: #e47757;
   --gold: #d4ae68;
+  /* Smallest permitted text size: tracked uppercase labels stay legible. */
+  --text-label: 0.75rem;
+  /* Coloured meta labels: eyebrows, dates, tags, categories. */
+  --text-meta: 0.8125rem;
+  --text-body: clamp(1rem, 0.9rem + 0.35vw, 1.1875rem);
+  --text-section: clamp(3.5rem, 6.25vw, 6rem);
+  --motion-fast: 200ms;
+  --motion-medium: 500ms;
+  --motion-slow: 900ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html {
@@ -1269,7 +1231,7 @@ body::before {
   border-color: var(--faint);
 }
 
-.hero h1 em {
+.hero h1 span {
   color: var(--blue);
 }
 
@@ -1375,14 +1337,14 @@ body::before {
   border-top: 1px solid var(--faint);
   display: flex;
   justify-content: space-between;
-  margin-top: clamp(7rem, 12vw, 12rem);
+  margin-top: clamp(4rem, 7vw, 7rem);
   padding-block: 2.5rem;
 }
 
 .archive-cta p {
   color: var(--muted);
   font-family: var(--font-serif);
-  font-size: 1rem;
+  font-size: var(--text-body);
   line-height: 1.6;
   margin: 0;
   max-width: 30rem;
@@ -1407,7 +1369,7 @@ body::before {
   display: grid;
   gap: 2rem;
   grid-template-columns: 4fr 8fr;
-  margin-bottom: clamp(7rem, 12vw, 12rem);
+  margin-bottom: clamp(4rem, 7vw, 7rem);
 }
 
 .profile-heading > .eyebrow {
@@ -1417,21 +1379,21 @@ body::before {
 
 .profile-heading h2 {
   font-family: var(--font-serif);
-  font-size: clamp(4rem, 8vw, 8.5rem);
+  font-size: var(--text-section);
   font-weight: 400;
   letter-spacing: -0.075em;
   line-height: 0.9;
   margin: 0;
 }
 
-.profile-heading h2 em {
+.profile-heading h2 span {
   color: var(--muted);
   font-weight: 400;
 }
 
 .profile-block {
   border-top: 1px solid var(--faint);
-  padding-block: clamp(5rem, 9vw, 9rem);
+  padding-block: clamp(3.5rem, 6vw, 6rem);
 }
 
 .profile-block:last-child {
@@ -1442,7 +1404,7 @@ body::before {
   display: grid;
   gap: 2rem;
   grid-template-columns: minmax(5rem, 2fr) 10fr;
-  margin-bottom: clamp(4rem, 7vw, 7rem);
+  margin-bottom: clamp(2.5rem, 4.5vw, 4.5rem);
 }
 
 .block-heading > span {
@@ -1459,7 +1421,7 @@ body::before {
 
 .block-heading h3 {
   font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 5vw, 5.5rem);
+  font-size: clamp(2.25rem, 4vw, 4rem);
   font-weight: 400;
   letter-spacing: -0.065em;
   line-height: 1;
@@ -1477,14 +1439,14 @@ body::before {
 .specialization,
 .specialization:nth-child(2) {
   background: var(--paper-bright);
-  min-height: 24rem;
+  min-height: 0;
   padding: clamp(2rem, 4vw, 3.5rem);
 }
 
 .specialization > span {
   color: var(--blue);
   font-family: var(--font-sans);
-  font-size: 0.6rem;
+  font-size: var(--text-label);
   font-weight: 800;
   letter-spacing: 0.15em;
 }
@@ -1496,7 +1458,7 @@ body::before {
   font-style: normal;
   font-weight: 400;
   letter-spacing: -0.05em;
-  margin: 6rem 0 1.5rem;
+  margin: 2.5rem 0 1.5rem;
 }
 
 .specialization p {
@@ -1526,7 +1488,7 @@ body::before {
 .about-copy .about-lead {
   color: var(--ink);
   font-family: var(--font-serif);
-  font-size: clamp(1.7rem, 3vw, 2.7rem);
+  font-size: clamp(1.6rem, 2.4vw, 2.25rem);
   letter-spacing: -0.035em;
   line-height: 1.3;
   margin-bottom: 2.5rem;
@@ -1568,7 +1530,7 @@ body::before {
   color: var(--muted);
   display: flex;
   flex-direction: column;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   gap: 0.65rem;
   letter-spacing: 0.06em;
   list-style: none;
@@ -1596,7 +1558,7 @@ body::before {
 
 .interests-panel dd {
   color: var(--gold);
-  font-size: 0.53rem;
+  font-size: var(--text-meta);
   font-weight: 800;
   margin: 0;
 }
@@ -1634,14 +1596,15 @@ body::before {
 }
 
 .timeline-marker span {
-  font-size: 0.56rem;
+  font-size: var(--text-label);
   font-weight: 800;
   letter-spacing: 0.12em;
 }
 
 .timeline-period span,
 .timeline-period strong {
-  font-size: 0.7rem;
+  /* Dates and tags are the key facts in this column, so larger than other meta. */
+  font-size: 0.9375rem;
   font-weight: 800;
   letter-spacing: 0.1em;
   line-height: 1.45;
@@ -1668,7 +1631,7 @@ body::before {
 
 .timeline-copy h4 {
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 4vw, 4rem);
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
   font-weight: 400;
   letter-spacing: -0.055em;
   line-height: 1;
@@ -1696,12 +1659,11 @@ body::before {
 
 .contact-copy > .eyebrow,
 .contact-intro,
-.contact-links span,
-.contact-links em {
+.contact-value {
   color: var(--muted);
 }
 
-.contact h2 em {
+.contact h2 span {
   color: var(--red);
 }
 
@@ -1720,7 +1682,7 @@ body::before {
 .footer-meta p,
 .footer-index {
   color: var(--muted);
-  font-size: 0.56rem;
+  font-size: var(--text-label);
   font-weight: 700;
   letter-spacing: 0.16em;
   line-height: 1.7;
@@ -1738,7 +1700,7 @@ body::before {
   cursor: pointer;
   display: flex;
   font-family: var(--font-sans);
-  font-size: 0.57rem;
+  font-size: var(--text-label);
   font-weight: 800;
   gap: 1rem;
   letter-spacing: 0.13em;
@@ -1750,10 +1712,10 @@ body::before {
   text-transform: uppercase;
   transform: translateY(1rem);
   transition:
-    background 220ms ease,
-    color 220ms ease,
-    opacity 220ms ease,
-    transform 220ms ease;
+    background var(--motion-fast) ease,
+    color var(--motion-fast) ease,
+    opacity var(--motion-fast) ease,
+    transform var(--motion-fast) ease;
   z-index: 90;
 }
 
@@ -1801,7 +1763,7 @@ body::before {
   margin: 0;
 }
 
-.works-hero h1 em {
+.works-hero h1 span {
   color: var(--red);
   font-weight: 400;
 }
@@ -1819,7 +1781,7 @@ body::before {
 
 .works-hero-copy a {
   border-bottom: 1px solid var(--gold);
-  font-size: 0.58rem;
+  font-size: var(--text-label);
   font-weight: 800;
   letter-spacing: 0.15em;
   padding-bottom: 0.45rem;
@@ -1855,7 +1817,7 @@ body::before {
   cursor: pointer;
   flex: 0 0 auto;
   font: inherit;
-  font-size: 0.58rem;
+  font-size: var(--text-label);
   font-weight: 800;
   letter-spacing: 0.13em;
   padding: 1.6rem clamp(1rem, 2.5vw, 2.5rem);
@@ -1873,14 +1835,14 @@ body::before {
 
 .work-filters button span {
   color: var(--gold);
-  font-size: 0.48rem;
+  font-size: var(--text-label);
   margin-left: 0.55rem;
   vertical-align: super;
 }
 
 .works-result-count {
   color: var(--muted);
-  font-size: 0.55rem;
+  font-size: var(--text-label);
   font-weight: 700;
   letter-spacing: 0.14em;
   margin: 3rem 0;
@@ -1913,7 +1875,7 @@ body::before {
 
 .work-image img {
   object-fit: cover;
-  transition: transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform var(--motion-slow) var(--ease-out);
 }
 
 .work-card:hover .work-image img {
@@ -1930,7 +1892,7 @@ body::before {
 
 .work-card-meta p,
 .work-card-meta > span {
-  font-size: 0.54rem;
+  font-size: var(--text-label);
   font-weight: 800;
   letter-spacing: 0.12em;
   margin: 0;
@@ -2065,7 +2027,7 @@ body::before {
   }
 
   .profile-heading {
-    margin-bottom: 7rem;
+    margin-bottom: 4rem;
   }
 
   .block-heading {
@@ -2082,11 +2044,11 @@ body::before {
 
   .specialization,
   .specialization:nth-child(2) {
-    min-height: 20rem;
+    min-height: 0;
   }
 
   .specialization h4 {
-    margin-top: 4rem;
+    margin-top: 2.5rem;
   }
 
   .about-grid {
@@ -2170,7 +2132,7 @@ body::before {
 }
 
 .archive-display-title {
-  color: rgb(243 240 233 / 28%);
+  color: var(--ink);
   letter-spacing: -0.035em;
 }
 
@@ -2186,7 +2148,7 @@ body::before {
   display: grid;
   gap: clamp(3rem, 8vw, 8rem);
   grid-template-columns: 8fr 4fr;
-  margin-bottom: clamp(5rem, 9vw, 9rem);
+  margin-bottom: clamp(3.5rem, 6vw, 6rem);
 }
 
 .all-works-heading .eyebrow {
@@ -2196,21 +2158,21 @@ body::before {
 
 .all-works-heading h2 {
   font-family: var(--font-serif);
-  font-size: clamp(4rem, 8.5vw, 9rem);
+  font-size: var(--text-section);
   font-weight: 400;
   letter-spacing: -0.08em;
   line-height: 0.85;
   margin: 0;
 }
 
-.all-works-heading h2 em {
+.all-works-heading h2 span {
   color: var(--red);
   font-weight: 400;
 }
 
 .all-works-heading > p {
   color: var(--muted);
-  font-size: 1rem;
+  font-size: var(--text-body);
   line-height: 1.8;
   margin: 0;
   max-width: 30rem;
@@ -2223,11 +2185,11 @@ body::before {
 .about-copy > p:not(.about-lead),
 .timeline-copy p,
 .contact-intro {
-  font-size: 1rem;
+  font-size: var(--text-body);
 }
 
 .all-works .work-filters {
-  top: clamp(5rem, 7.5vw, 7rem);
+  top: var(--header-height, clamp(5rem, 7.5vw, 7.5rem));
   z-index: 50;
 }
 
@@ -2252,10 +2214,411 @@ body::before {
 
 @media (max-width: 720px) {
   .all-works .work-filters {
-    top: 4.4rem;
+    top: var(--header-height, 4.6rem);
   }
 
   .all-works-heading h2 {
-    font-size: clamp(4rem, 23vw, 6.5rem);
+    font-size: var(--text-section);
   }
+}
+
+/* Hero actions */
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2.5rem;
+}
+
+/* Image triggers and lightbox */
+
+.image-trigger {
+  appearance: none;
+  border: 0;
+  border-radius: 0;
+  color: inherit;
+  cursor: zoom-in;
+  display: block;
+  font: inherit;
+  padding: 0;
+  width: 100%;
+}
+
+.lightbox {
+  background: rgb(7 8 9 / 97%);
+  border: 0;
+  color: var(--ink);
+  display: none;
+  height: 100dvh;
+  inset: 0;
+  margin: 0;
+  max-height: none;
+  max-width: none;
+  overflow-y: auto;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+  width: 100vw;
+}
+
+.lightbox[open] {
+  animation: lightbox-in var(--motion-fast) ease;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.lightbox::backdrop {
+  background: transparent;
+}
+
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.lightbox-bar {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  min-height: 4.5rem;
+}
+
+.lightbox-bar p {
+  color: var(--muted);
+  font-size: var(--text-label);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  margin: 0;
+}
+
+.lightbox button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: var(--ink);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: var(--text-label);
+  font-weight: 800;
+  gap: 0.6rem;
+  letter-spacing: 0.16em;
+  min-height: 2.75rem;
+  padding: 0 0.25rem;
+  text-transform: uppercase;
+}
+
+.lightbox button:hover {
+  color: var(--blue);
+}
+
+.lightbox-close span {
+  font-size: 1.1rem;
+}
+
+.lightbox-figure {
+  align-items: center;
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  grid-template-columns: minmax(0, 1fr) minmax(14rem, 22rem);
+  margin: 0;
+  min-height: 0;
+}
+
+.lightbox-image {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  min-height: 0;
+}
+
+.lightbox-image img {
+  height: auto;
+  max-height: calc(100dvh - 11rem);
+  max-width: 100%;
+  object-fit: contain;
+  width: auto;
+}
+
+.lightbox-caption p {
+  font-size: var(--text-label);
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.lightbox-caption[data-accent="blue"] p {
+  color: var(--blue);
+}
+
+.lightbox-caption[data-accent="coral"] p {
+  color: var(--red);
+}
+
+.lightbox-caption[data-accent="gold"] p {
+  color: var(--gold);
+}
+
+.lightbox-caption h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+  margin: 0.7rem 0 1rem;
+}
+
+.lightbox-caption span {
+  color: var(--muted);
+  display: block;
+  line-height: 1.7;
+}
+
+.lightbox-caption small {
+  color: var(--muted);
+  display: block;
+  font-size: var(--text-label);
+  letter-spacing: 0.1em;
+  margin-top: 1.5rem;
+  text-transform: uppercase;
+}
+
+.lightbox-nav {
+  border-top: 1px solid var(--faint);
+  display: flex;
+  justify-content: space-between;
+  padding-block: 0.75rem;
+}
+
+html:has(.lightbox[open]) {
+  overflow: hidden;
+}
+
+/* Complete index pagination */
+
+.works-more {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(4rem, 7vw, 7rem);
+}
+
+/* Footer contact links */
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footer-links a {
+  color: var(--ink);
+  font-size: var(--text-label);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  transition: color var(--motion-fast) ease;
+}
+
+.footer-links a:hover {
+  color: var(--blue);
+}
+
+@media (max-width: 960px) {
+  .lightbox-figure {
+    align-content: center;
+    grid-template-columns: 1fr;
+  }
+
+  .lightbox-image img {
+    max-height: calc(100dvh - 19rem);
+  }
+}
+
+@media (max-width: 720px) {
+  .hero-actions {
+    flex-direction: column;
+  }
+}
+
+/* About me: portrait beside copy; skills and interests beneath the copy */
+
+.about-grid {
+  align-items: start;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+}
+
+/* Sticky so the portrait stays beside the longer copy column while reading. */
+.about-portrait {
+  aspect-ratio: 4 / 5;
+  background: var(--surface-raised);
+  margin: 0;
+  overflow: hidden;
+  position: sticky;
+  top: calc(var(--header-height, 7.5rem) + 2rem);
+}
+
+.about-portrait img {
+  object-fit: cover;
+}
+
+.about-body {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 4vw, 4rem);
+  min-width: 0;
+}
+
+.about-body .about-copy {
+  grid-column: auto;
+  max-width: 40rem;
+  padding-right: 0;
+}
+
+.about-details {
+  border-top: 1px solid var(--faint);
+  display: grid;
+  gap: clamp(2rem, 4vw, 4rem);
+  grid-template-columns: minmax(0, 4fr) minmax(0, 3fr);
+  padding-top: clamp(2rem, 3vw, 3rem);
+}
+
+.about-details .skills-panel,
+.about-details .interests-panel {
+  border: 0;
+  padding: 0;
+}
+
+.about-details .interests-panel {
+  border-left: 1px solid var(--faint);
+  padding-left: clamp(1.5rem, 3vw, 3rem);
+}
+
+@media (max-width: 960px) {
+  .about-grid {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  }
+
+  .about-details {
+    grid-template-columns: 1fr;
+  }
+
+  .about-details .interests-panel {
+    border-left: 0;
+    border-top: 1px solid var(--faint);
+    padding-left: 0;
+    padding-top: 2rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-portrait {
+    max-width: 22rem;
+    position: relative;
+    top: auto;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Motion: photos develop, crop marks, lightbox morph                  */
+/* ------------------------------------------------------------------ */
+
+html {
+  /* Keep width stable when the lightbox locks page scroll. */
+  scrollbar-gutter: stable;
+}
+
+/* Like a print in the developing tray: pale and flat, settling to full tone. */
+@keyframes develop {
+  from {
+    filter: grayscale(1) brightness(1.45) contrast(0.7);
+  }
+
+  to {
+    filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* The hero photo is visible on first paint and develops once on load. */
+  .hero .parallax-image img {
+    animation: develop 1.6s var(--ease-out) both;
+  }
+
+  /* Other photos develop as they scroll into view. The timeline is declared
+     on each overflow-hidden frame, because a scroll timeline on the image
+     itself would resolve to that frame and never advance. */
+  @supports (animation-timeline: view()) {
+    .archive-image,
+    .work-image,
+    .about-portrait,
+    .contact-image .parallax-image {
+      view-timeline-name: --develop;
+    }
+
+    .archive-image img,
+    .work-image img,
+    .about-portrait img,
+    .contact-image .parallax-image img {
+      animation: develop linear both;
+      animation-range: entry 10% cover 40%;
+      animation-timeline: --develop;
+    }
+  }
+}
+
+/* Viewfinder crop marks on hover and keyboard focus. */
+.image-trigger::after {
+  --mark: rgb(243 240 233 / 92%);
+  --mark-length: 1.4rem;
+  background:
+    linear-gradient(var(--mark), var(--mark)) top left / var(--mark-length) 1px,
+    linear-gradient(var(--mark), var(--mark)) top left / 1px var(--mark-length),
+    linear-gradient(var(--mark), var(--mark)) top right / var(--mark-length) 1px,
+    linear-gradient(var(--mark), var(--mark)) top right / 1px var(--mark-length),
+    linear-gradient(var(--mark), var(--mark)) bottom left / var(--mark-length) 1px,
+    linear-gradient(var(--mark), var(--mark)) bottom left / 1px var(--mark-length),
+    linear-gradient(var(--mark), var(--mark)) bottom right / var(--mark-length) 1px,
+    linear-gradient(var(--mark), var(--mark)) bottom right / 1px var(--mark-length);
+  background-repeat: no-repeat;
+  content: "";
+  filter: drop-shadow(0 0 1px rgb(0 0 0 / 70%));
+  inset: clamp(0.75rem, 1.5vw, 1.25rem);
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transform: scale(1.06);
+  transition:
+    opacity var(--motion-fast) ease,
+    transform var(--motion-medium) var(--ease-out);
+}
+
+.image-trigger:is(:hover, :focus-visible)::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Shared-element morph between a thumbnail and the lightbox photo. */
+::view-transition-group(lightbox-photo) {
+  animation-duration: var(--motion-medium);
+  animation-timing-function: var(--ease-out);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--motion-fast);
+}
+
+/* Category labels on cards and in the lightbox read as coloured meta text. */
+.archive-category,
+.work-card-meta p,
+.lightbox-caption p {
+  font-size: var(--text-meta);
 }

@@ -3,6 +3,113 @@
 This file records decisions that future sessions must preserve. Add new entries
 at the top. Do not rewrite older entries; supersede them with a newer decision.
 
+## 2026-11-10 - Larger labels; single hero action
+
+Decided by the user.
+
+- `--text-label` is now 0.75rem (12px). This supersedes the 11px floor from
+  earlier today; nothing renders below 12px.
+- New `--text-meta` (0.8125rem, 13px) for coloured meta text: eyebrows, card
+  and lightbox category labels, interest codes. Timeline dates and tags are
+  0.9375rem (15px), since they are the key facts in that column.
+- Contact handles (`.contact-value`) are 1rem.
+- The hero has one action, "Get in touch" (solid button to `#contact`). "View
+  the work" was removed as unnecessary.
+
+## 2026-11-10 - Motion system and photography-specific motion
+
+Decided by the user ("build all six"); implementation by the agent.
+
+- Motion tokens: `--motion-fast` 200ms, `--motion-medium` 500ms,
+  `--motion-slow` 900ms, and `--ease-out`. New motion uses these. The 80ms
+  parallax smoothing is the deliberate exception.
+- The hero is never hidden: no scroll reveal, visible on first paint. Scroll
+  reveals hide content only under `html.js`, which an inline script in
+  `layout.tsx` sets, so no-JS visitors see everything. Text rises 16px; blocks
+  containing photos only fade.
+- Photos "develop" (pale and flat, settling to full tone). The hero does this
+  once on load; others are scroll-linked through a `--develop` view timeline
+  declared on each overflow-hidden frame. Browsers without
+  `animation-timeline` show the photos normally.
+- Image triggers show viewfinder crop marks on hover and `:focus-visible`.
+- The lightbox opens, navigates, and closes with a View Transitions
+  shared-element morph (`src/components/ui/photo-morph.ts`, `useLightbox`).
+  Without support it falls back to the fade. Only one rendered element may
+  carry the `lightbox-photo` name at a time.
+- With reduced motion, the morph is skipped and the develop animations are
+  not declared.
+- Hover effects animate `transform`/`opacity` only, never layout properties.
+
+## 2026-11-10 - Rebalanced type scale
+
+Decided by the user. On desktop, the section headings were about 7.5 times
+the body text, so the body read like captions.
+
+- Body copy uses `--text-body`: `clamp(1rem, 0.9rem + 0.35vw, 1.1875rem)`
+  (16px on phones, 19px on wide screens).
+- Section headings (Profile, Inquiry, Complete Index) use `--text-section`:
+  `clamp(3.5rem, 6.25vw, 6rem)` (56px to 96px). They must stay smaller than
+  the hero `h1`. The ghost "Chronicle" title matches them on desktop.
+- Block headings are `clamp(2.25rem, 4vw, 4rem)`, timeline titles
+  `clamp(1.75rem, 3vw, 2.75rem)`, the About lead
+  `clamp(1.6rem, 2.4vw, 2.25rem)`, and skill items 0.75rem.
+- New body or heading text should use these variables rather than one-off
+  sizes.
+
+## 2026-11-10 - Profile order and About me portrait
+
+Decided by the user; layout chosen by the agent.
+
+- The Profile sub-blocks are ordered 01 About me, 02 Main specialisations,
+  03 Past experience. The homepage section order is unchanged.
+- About me includes a portrait of Denzel (`aboutPortrait` in
+  `src/content/portfolio.ts`, currently
+  `public/images/about-portrait-placeholder.svg`, 4:5). On desktop it sits in a
+  sticky left column beside the copy, with skills and interests beneath the
+  copy. Below 720px it stacks above the copy, at most 22rem wide.
+
+## 2026-11-10 - Filter clicks return to the top of the Complete Index
+
+Decided by the user. Selecting any Complete Index filter scrolls to the start
+of the Complete Index section, the same position as the "Complete index" nav
+link, instead of leaving the viewport where it was.
+
+## 2026-11-10 - No decorative italics
+
+Decided by the user: italic text made the site look generic ("vibe-coded").
+
+- No text is italic: not eyebrows, the wordmark, the footer name, card titles,
+  the ghost "Chronicle" title, hover states, or the OG image.
+- The coloured second line of display headings stays, but upright. It is a
+  plain `<span>` (styled via `h1 span`/`h2 span`), not `<em>`.
+- Lora loads only its normal style. Reintroduce italics only for genuine
+  emphasis or titles of works, and only with a recorded decision.
+
+## 2026-11-10 - Works open in a client-side lightbox; index pages by twelve
+
+Decided by the user (approved the top three UI-review fixes); implementation
+choices by the agent.
+
+- Every Chronicle and Complete Index image is a button that opens a shared
+  native `<dialog>` lightbox (`src/components/ui/lightbox.tsx`) with Escape,
+  arrow-key navigation, click-outside dismissal, and focus restoration. This is
+  static client code, not a CMS-backed gallery, so the version-one static
+  scope still holds. Per-work pages were the alternative and remain possible.
+- The Complete Index shows 12 works per filter with a "Show N more" button;
+  changing filters resets to 12. The "all" filter is labelled "All".
+- Text must not render below `--text-label` (0.6875rem / 11px).
+- Use `overflow-x: clip` (not `hidden`) on `html` and `body`; `hidden` makes
+  `body` a scroll container and disables `position: sticky`.
+- `--header-height` is published at runtime by `HeaderHeightSync`; sticky
+  elements and anchor offsets must use it rather than hard-coded values.
+  Anchors land flush: `scroll-padding-top` is the header height minus 1px. Do
+  not add breathing room there, or a strip of the previous section shows.
+- Decorative labels that carried no information were removed: the hero
+  "Plate No. 01" overlay, the contact image caption, "Channel / 0N" prefixes,
+  and the footer "Portfolio / 2026". The footer now carries the contact links,
+  and the hero has "View the work" and "Get in touch" actions. The section
+  order is unchanged.
+
 ## 2026-08-02 - Syncthing carries source, not generated dependencies
 
 - Keep `.stignore` tracked so every Syncthing device applies the same rules.

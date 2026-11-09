@@ -24,7 +24,6 @@ export default function OpenGraphImage() {
           style={{
             display: "flex",
             fontSize: 26,
-            fontStyle: "italic",
             fontWeight: 600,
             justifyContent: "space-between",
             letterSpacing: "-0.04em",

@@ -1,41 +1,43 @@
 import { ParallaxImage } from "@/components/ui/parallax-image";
-import { Reveal } from "@/components/ui/reveal";
 import { heroImage } from "@/content/portfolio";
 
+// The hero is visible on first paint (no scroll reveal); only its photo
+// "develops" via a CSS load animation.
 export function Hero() {
   return (
     <section className="hero page-shell" id="top" aria-labelledby="hero-title">
       <div className="hero-copy">
-        <Reveal className="hero-index">
+        <div className="hero-index">
           <p className="eyebrow">Selected Works / 2026</p>
           <div className="identity-rule">
             <span>Freelance, hobbyist photographer</span>
           </div>
-        </Reveal>
-        <Reveal className="hero-statement" delay={100}>
+        </div>
+        <div className="hero-statement">
           <h1 id="hero-title">
             Moments
             <br />
             in life,
             <br />
-            <em>through my eyes.</em>
+            <span>through my eyes.</span>
           </h1>
           <p className="hero-intro">
             Capturing memories and emotion in every moment.
           </p>
-        </Reveal>
+          <div className="hero-actions">
+            <a className="button button-solid" href="#contact">
+              Get in touch
+            </a>
+          </div>
+        </div>
       </div>
-      <Reveal className="hero-visual" delay={180}>
+      <div className="hero-visual">
         <ParallaxImage image={heroImage} priority />
         <div className="registration-dots" aria-hidden="true">
           <span />
           <span />
         </div>
-        <div className="plate-overlay">
-          <strong>Plate No. 01</strong>
-          <span>Image placeholder</span>
-        </div>
-      </Reveal>
+      </div>
     </section>
   );
 }

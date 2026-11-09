@@ -4,15 +4,22 @@ import type { PortfolioItem } from "@/content/types";
 interface ArchiveCardProps {
   item: PortfolioItem;
   index: number;
+  onOpen: () => void;
 }
 
-export function ArchiveCard({ item, index }: ArchiveCardProps) {
+export function ArchiveCard({ item, index, onOpen }: ArchiveCardProps) {
   return (
     <article
       className={`archive-card archive-card-${index + 1}`}
       data-accent={item.accent}
     >
-      <div className="archive-image">
+      <button
+        className="archive-image image-trigger"
+        type="button"
+        aria-label={`View ${item.title} full size`}
+        aria-haspopup="dialog"
+        onClick={onOpen}
+      >
         <Image
           src={item.image.src}
           alt={item.image.alt}
@@ -23,7 +30,7 @@ export function ArchiveCard({ item, index }: ArchiveCardProps) {
               : "(max-width: 768px) 100vw, 42vw"
           }
         />
-      </div>
+      </button>
       <div className="archive-copy">
         <div>
           <p className="archive-category">{item.categoryLabel}</p>

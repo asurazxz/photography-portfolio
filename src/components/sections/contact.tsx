@@ -13,33 +13,28 @@ export function Contact() {
             <br />
             document
             <br />
-            <em>what matters?</em>
+            <span>what matters?</span>
           </h2>
           <p className="contact-intro">
             Available for event coverage, portrait sessions, and creative
             collaborations in Singapore.
           </p>
           <div className="contact-links">
-            {portfolioContent.contacts.map((contact, index) => (
+            {portfolioContent.contacts.map((contact) => (
               <a
                 href={contact.href}
                 key={contact.id}
                 target={contact.external ? "_blank" : undefined}
                 rel={contact.external ? "noreferrer" : undefined}
               >
-                <span>Channel / 0{index + 1}</span>
                 <strong>{contact.label}</strong>
-                <em>{contact.value}</em>
+                <span className="contact-value">{contact.value}</span>
               </a>
             ))}
           </div>
         </Reveal>
         <Reveal className="contact-image" delay={120}>
           <ParallaxImage image={contactImage} />
-          <div className="contact-image-caption">
-            <span>Portfolio image</span>
-            <span>Placeholder / 2026</span>
-          </div>
         </Reveal>
       </div>
     </section>

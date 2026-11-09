@@ -14,7 +14,7 @@ const lora = Lora({
   subsets: ["latin"],
   variable: "--font-lora",
   display: "swap",
-  style: ["normal", "italic"],
+  style: ["normal"],
 });
 
 const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL;
@@ -71,7 +71,20 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="en" className={`${inter.variable} ${lora.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${lora.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        {/* Scroll reveals hide content only once JS is known to run, so the
+            page stays fully visible if scripts are blocked or fail. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js')",
+          }}
+        />
+      </head>
       <body>
         {children}
         <BackToTop />

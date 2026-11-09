@@ -12,6 +12,15 @@ export const heroImage: ImageMetadata = {
   height: 1440,
 };
 
+// Replace with the real photo: save it under public/images/, then update
+// src, width, height, and alt (describe the photo, e.g. setting and pose).
+export const aboutPortrait: ImageMetadata = {
+  src: "/images/about-portrait-placeholder.svg",
+  alt: "Placeholder reserved for a portrait of Denzel Marani",
+  width: 1000,
+  height: 1250,
+};
+
 export const contactImage: ImageMetadata = {
   src: "/images/contact-placeholder.svg",
   alt: "Placeholder reserved for a closing image from Denzel Marani's portfolio",

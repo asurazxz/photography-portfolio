@@ -1,3 +1,5 @@
+import { portfolioContent } from "@/content/portfolio";
+
 export function SiteFooter() {
   return (
     <footer className="site-footer">
@@ -12,7 +14,18 @@ export function SiteFooter() {
         <p>Freelance, hobbyist photographer</p>
         <p>Operating out of Singapore</p>
       </div>
-      <p className="footer-index">Portfolio / 2026</p>
+      <nav className="footer-links" aria-label="Contact">
+        {portfolioContent.contacts.map((contact) => (
+          <a
+            href={contact.href}
+            key={contact.id}
+            target={contact.external ? "_blank" : undefined}
+            rel={contact.external ? "noreferrer" : undefined}
+          >
+            {contact.value}
+          </a>
+        ))}
+      </nav>
     </footer>
   );
 }

@@ -14,7 +14,7 @@ export function CompleteIndex() {
           <div>
             <p className="eyebrow">Full portfolio / 2026</p>
             <h2 id="all-works-title">
-              Complete <em>index.</em>
+              Complete <span>index.</span>
             </h2>
           </div>
           <p>
