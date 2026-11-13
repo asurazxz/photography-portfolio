@@ -63,5 +63,9 @@ export function runPhotoMorph(update: () => void, options: MorphOptions = {}) {
     update();
     await waitForLightboxPhoto();
   });
+  // `ready` rejects whenever the animation is skipped (a newer transition
+  // started, or the tab is hidden). The update still ran, so there is nothing
+  // to handle; this only keeps the rejection out of the console.
+  transition.ready.catch(() => undefined);
   transition.finished.finally(() => cleanup?.());
 }

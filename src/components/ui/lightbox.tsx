@@ -8,6 +8,7 @@ import {
   useState,
   type KeyboardEvent,
   type MouseEvent,
+  type PointerEvent,
 } from "react";
 import { flushSync } from "react-dom";
 import {
@@ -18,6 +19,10 @@ import {
 import type { PortfolioItem } from "@/content/types";
 
 const THUMB_SELECTOR = ".image-trigger img";
+
+// A touch counts as a swipe when it travels this far and is mostly horizontal.
+const SWIPE_MIN_DISTANCE_PX = 48;
+const SWIPE_MIN_SLOPE = 1.5;
 
 /**
  * State and wiring for a gallery that opens its photos in the lightbox.
@@ -73,6 +78,7 @@ export function Lightbox({
   const returnFocusRef = useRef<HTMLElement | null>(null);
   const onCloseRef = useRef(onClose);
   const requestCloseRef = useRef<() => void>(() => undefined);
+  const swipeStartRef = useRef<{ x: number; y: number } | null>(null);
   const item = index === null ? undefined : items[index];
   const hasMultiple = items.length > 1;
 
@@ -122,6 +128,11 @@ export function Lightbox({
     }
     const thumb = index === null ? null : (getThumb?.(index) ?? null);
     const target = thumb && isInViewport(thumb) ? thumb : null;
+    // Focus goes back to the photo last shown, not the one that opened the viewer.
+    const trigger = thumb?.closest<HTMLElement>("button");
+    if (trigger) {
+      returnFocusRef.current = trigger;
+    }
     runPhotoMorph(
       () => {
         dialog.close();
@@ -171,6 +182,38 @@ export function Lightbox({
     }
   };
 
+  const handlePointerDown = (event: PointerEvent<HTMLDialogElement>) => {
+    swipeStartRef.current =
+      event.pointerType === "touch" && event.isPrimary
+        ? { x: event.clientX, y: event.clientY }
+        : null;
+  };
+
+  const handlePointerUp = (event: PointerEvent<HTMLDialogElement>) => {
+    const start = swipeStartRef.current;
+    swipeStartRef.current = null;
+    if (!start || !hasMultiple) {
+      return;
+    }
+    const deltaX = event.clientX - start.x;
+    const deltaY = event.clientY - start.y;
+    if (
+      Math.abs(deltaX) < SWIPE_MIN_DISTANCE_PX ||
+      Math.abs(deltaX) < Math.abs(deltaY) * SWIPE_MIN_SLOPE
+    ) {
+      return;
+    }
+    if (deltaX < 0) {
+      showNext();
+    } else {
+      showPrevious();
+    }
+  };
+
+  const handlePointerCancel = () => {
+    swipeStartRef.current = null;
+  };
+
   const handleClick = (event: MouseEvent<HTMLDialogElement>) => {
     // Clicks on empty layout space (not the photo, caption, or controls) dismiss the viewer.
     const target = event.target as HTMLElement;
@@ -191,6 +234,9 @@ export function Lightbox({
       aria-label={item ? undefined : "Image viewer"}
       onKeyDown={handleKeyDown}
       onClick={handleClick}
+      onPointerDown={handlePointerDown}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerCancel}
     >
       {item && index !== null ? (
         <>

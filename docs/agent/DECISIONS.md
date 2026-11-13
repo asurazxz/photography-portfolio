@@ -3,6 +3,23 @@
 This file records decisions that future sessions must preserve. Add new entries
 at the top. Do not rewrite older entries; supersede them with a newer decision.
 
+## 2026-11-13 - Lightbox and caption fixes from the design review
+
+Approved by the user ("fix the quick layout and lightbox issues"); the agent
+chose the implementation.
+
+- The lightbox background is opaque (`#070809`), so the page never shows
+  through behind a photo.
+- On touch, a mostly horizontal swipe of 48px or more moves to the next or
+  previous photo. `.lightbox` sets `touch-action: pan-y pinch-zoom`; keep it,
+  or the browser claims horizontal swipes and the gesture stops working.
+- Closing the lightbox returns focus to the photo last shown, not the one
+  that opened it.
+- Chronicle cards are size containers. Below 30rem of card width, the plate
+  label stacks under the copy instead of beside it.
+- From 721px up, the footer has 6.5rem of bottom padding so "Back to top"
+  never covers a footer link.
+
 ## 2026-11-13 - Hero fits the first viewport; thinner navbar
 
 Requested by the user; the agent chose the implementation.
