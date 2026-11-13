@@ -10,7 +10,7 @@ export default function OpenGraphImage() {
       <div
         style={{
           alignItems: "stretch",
-          background: "#090b0d",
+          background: "#0d1013",
           color: "#f3f0e9",
           display: "flex",
           flexDirection: "column",
@@ -59,7 +59,7 @@ export default function OpenGraphImage() {
           </span>
         </div>
         <div style={{ display: "flex", gap: 12 }}>
-          <span style={{ background: "#6c8cff", borderRadius: 99, height: 10, width: 10 }} />
+          <span style={{ background: "#7c92de", borderRadius: 99, height: 10, width: 10 }} />
           <span style={{ background: "#e47757", borderRadius: 99, height: 10, width: 10 }} />
         </div>
       </div>

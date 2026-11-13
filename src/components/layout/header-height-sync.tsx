@@ -15,7 +15,10 @@ export function HeaderHeightSync() {
 
     const root = document.documentElement;
     const publish = () =>
-      root.style.setProperty("--header-height", `${header.offsetHeight}px`);
+      root.style.setProperty(
+        "--header-height",
+        `${header.getBoundingClientRect().height}px`,
+      );
     publish();
     const observer = new ResizeObserver(publish);
     observer.observe(header);

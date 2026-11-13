@@ -95,7 +95,7 @@ a {
 }
 
 .section-space {
-  padding-block: clamp(4.5rem, 8vw, 8rem);
+  padding-block: clamp(2.5rem, 4vw, 4rem) clamp(4.5rem, 8vw, 8rem);
 }
 
 .eyebrow {
@@ -1163,14 +1163,17 @@ a {
 /* Dark editorial theme */
 
 :root {
-  --paper: #090b0d;
-  --paper-bright: #0f1215;
-  --surface: #14181c;
-  --surface-raised: #191e23;
+  /* Background ladder, darkest first. `--paper` is the floor: no section or
+     overlay goes darker, so dark-edged photos keep a visible frame. */
+  --paper: #0d1013;
+  --paper-bright: #13171b;
+  --surface: #181c21;
+  --surface-raised: #1d2228;
   --ink: #f3f0e9;
   --muted: #a4a5a2;
   --faint: #2a3035;
-  --blue: #6c8cff;
+  /* Saturation kept near the coral and gold so the three read as one set. */
+  --blue: #7c92de;
   --red: #e47757;
   --gold: #d4ae68;
   /* Smallest permitted text size: tracked uppercase labels stay legible. */
@@ -1191,7 +1194,7 @@ html {
 
 body {
   background:
-    radial-gradient(circle at 78% 8%, rgb(108 140 255 / 8%), transparent 30rem),
+    radial-gradient(circle at 78% 8%, rgb(124 146 222 / 8%), transparent 30rem),
     var(--paper);
   color: var(--ink);
 }
@@ -1212,7 +1215,7 @@ body::before {
 
 .site-header {
   backdrop-filter: blur(16px);
-  background: rgb(9 11 13 / 96%);
+  background: rgb(13 16 19 / 96%);
   border-bottom: 1px solid var(--faint);
   mix-blend-mode: normal;
 }
@@ -1355,7 +1358,7 @@ body::before {
 
 .profile {
   background:
-    linear-gradient(140deg, rgb(108 140 255 / 5%), transparent 35%),
+    linear-gradient(140deg, rgb(124 146 222 / 5%), transparent 35%),
     var(--paper-bright);
   border-bottom: 1px solid var(--faint);
   border-top: 1px solid var(--faint);
@@ -1656,7 +1659,7 @@ body::before {
 .contact {
   background:
     linear-gradient(145deg, rgb(228 119 87 / 6%), transparent 36rem),
-    #070809;
+    var(--paper);
   color: var(--ink);
 }
 
@@ -1676,7 +1679,7 @@ body::before {
 }
 
 .site-footer {
-  background: #070809;
+  background: var(--paper);
   border-color: var(--faint);
   color: var(--ink);
 }
@@ -1797,7 +1800,7 @@ body::before {
 
 .work-filters {
   backdrop-filter: blur(18px);
-  background: rgb(9 11 13 / 90%);
+  background: rgb(13 16 19 / 90%);
   border-bottom: 1px solid var(--faint);
   display: flex;
   gap: 0;
@@ -1963,7 +1966,7 @@ body::before {
 
 @media (max-width: 720px) {
   .site-header {
-    background: rgb(9 11 13 / 97%);
+    background: rgb(13 16 19 / 97%);
   }
 
   .site-header .wordmark,
@@ -1987,7 +1990,7 @@ body::before {
   }
 
   .mobile-navigation {
-    background: #090b0d;
+    background: var(--paper);
     color: var(--ink);
     height: 100dvh;
     isolation: isolate;
@@ -2138,7 +2141,7 @@ body::before {
 .all-works {
   background:
     linear-gradient(160deg, rgb(228 119 87 / 4%), transparent 30rem),
-    #07090b;
+    var(--paper);
   border-top: 1px solid var(--faint);
 }
 
@@ -2188,7 +2191,8 @@ body::before {
 }
 
 .all-works .work-filters {
-  top: var(--header-height, clamp(5rem, 7.5vw, 7.5rem));
+  /* Tucks 1px under the header (z-index 60) so no subpixel seam can open. */
+  top: calc(var(--header-height, clamp(5rem, 7.5vw, 7.5rem)) - 1px);
   z-index: 50;
 }
 
@@ -2213,7 +2217,7 @@ body::before {
 
 @media (max-width: 720px) {
   .all-works .work-filters {
-    top: var(--header-height, 4.6rem);
+    top: calc(var(--header-height, 4.6rem) - 1px);
   }
 
   .all-works-heading h2 {
@@ -2246,7 +2250,7 @@ body::before {
 
 .lightbox {
   /* Opaque, so the page never shows through behind a photo. */
-  background: #070809;
+  background: var(--paper);
   border: 0;
   color: var(--ink);
   display: none;
@@ -2643,4 +2647,30 @@ html {
 .work-card-meta p,
 .lightbox-caption p {
   font-size: var(--text-meta);
+}
+
+/* Inquiry fits one screen below the header on desktop: vertical spacing,
+   heading size and photo height scale with viewport height. */
+@media (min-width: 961px) {
+  .contact-copy > .eyebrow {
+    margin-bottom: clamp(1.25rem, 4vh, 3rem);
+  }
+
+  .contact h2 {
+    font-size: min(var(--text-section), 10vh);
+  }
+
+  .contact-intro {
+    margin: clamp(1.25rem, 3.5vh, 3rem) 0 clamp(1.5rem, 4.5vh, 4rem);
+  }
+
+  .contact-links a {
+    padding-block: clamp(1rem, 2.6vh, 1.7rem);
+  }
+
+  .contact-image {
+    max-height: calc(
+      100svh - var(--header-height, 4.5rem) - clamp(2.5rem, 4vw, 4rem) - 5rem
+    );
+  }
 }

@@ -3,6 +3,64 @@
 This file records decisions that future sessions must preserve. Add new entries
 at the top. Do not rewrite older entries; supersede them with a newer decision.
 
+## 2026-11-13 - DM aperture favicon
+
+Accepted by the user, who selected the generated DM aperture design for the site.
+The agent installed a 256px PNG as `src/app/icon.png` and removed the superseded
+camera-outline SVG and duplicate concept file. Recheck small-size legibility if
+this identity is revised.
+## 2026-11-13 - Lifted backgrounds and a softer blue
+
+Proposed by the agent; the user tried it and decided to keep it. Status:
+Accepted.
+
+- Background ladder: `--paper` `#0d1013` (was `#090b0d`), `--paper-bright`
+  `#13171b`, `--surface` `#181c21`, `--surface-raised` `#1d2228`.
+- `--paper` is the floor. Inquiry, Complete Index, the footer, and the
+  lightbox used darker one-off values (`#070809`, `#07090b`); they now use
+  `var(--paper)`. This supersedes the `#070809` value in "Lightbox and caption
+  fixes"; the lightbox stays opaque.
+- `--blue` is `#7c92de` (was `#6c8cff`): same hue, saturation lowered to sit
+  with the coral and gold. The two blue background washes use the same colour.
+- The theme colour, the icon, and the Open Graph image use the same values.
+  Change them together.
+- Not addressed: the three accents still have no fixed roles (heading spans
+  and category labels vary by section and item).
+
+## 2026-11-13 - Exact header height; sticky bar tucks under the header
+
+Reported by the user; the agent chose the fix.
+
+- `HeaderHeightSync` publishes `getBoundingClientRect().height`, which keeps
+  fractional pixels. `offsetHeight` rounded the value, and at fractional
+  display scaling that opened a hairline seam.
+- The sticky Complete Index filter bar uses `top: calc(var(--header-height)
+  - 1px)`, so it sits 1px under the header (z-index 60 over 50). This matches
+  `scroll-padding-top`.
+
+## 2026-11-13 - Inquiry fits one screen on desktop
+
+Requested by the user; the agent chose the implementation.
+
+- From 961px up, when the Inquiry link is used, the whole section must be
+  visible at once: eyebrow, heading, intro, every contact link, and the photo.
+- The eyebrow gap, heading size (`min(var(--text-section), 10vh)`), intro
+  margins, and contact row padding scale with viewport height.
+- The photo has a `max-height` of the viewport minus the header, the section
+  top padding, and 5rem.
+- Below 961px, the layout stacks and scrolls as before.
+
+## 2026-11-13 - Tighter section tops below the navbar
+
+Requested by the user; the agent chose the values.
+
+- `.section-space` has a smaller top padding,
+  `clamp(2.5rem, 4vw, 4rem)`, so the heading of each anchored section sits
+  close under the navbar. On desktop this is about 76px from the navbar to the
+  first text, and about 40-56px at 390px.
+- The bottom padding stays `clamp(4.5rem, 8vw, 8rem)` and still separates the
+  sections.
+
 ## 2026-11-13 - Lightbox and caption fixes from the design review
 
 Approved by the user ("fix the quick layout and lightbox issues"); the agent
@@ -205,3 +263,4 @@ The repository must not retain third-party stock images or unsupported credits.
 Do not add galleries backed by a CMS, a contact backend, database,
 authentication, or analytics. Vercel hosts the static Next.js portfolio on its
 generated domain until custom-domain work is explicitly requested.
+
