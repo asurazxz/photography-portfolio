@@ -1,8 +1,18 @@
 # Current handoff
 
-Updated: 2026-11-10
+Updated: 2026-11-13
 Branch observed: `design-2`
-Base commit observed: `de2ebd9` (`minor tweaks + documentation`)
+Base commit observed: `0dcb6ac`
+
+## Latest session (2026-11-13)
+
+Two changes, both uncommitted:
+
+- The navbar is thinner, about 82px tall instead of 120px.
+- The hero now fits in the first viewport on desktop. Spacing, heading size,
+  and photo height scale with viewport height.
+
+Details: `sessions/2026-11-13-hero-fit-navbar.md`.
 
 ## Current state
 
@@ -21,7 +31,8 @@ What the site now does:
   back to the top of the section.
 - **Profile:** ordered About me (with a portrait placeholder), Main
   specialisations, Past experience.
-- **Hero:** visible on first paint, with a single "Get in touch" action. The
+- **Hero:** visible on first paint, with a single "Get in touch" action;
+  the whole hero fits in the first viewport on desktop (checked down to 1280x720). The
   footer carries the contact links.
 - **Design:** no italics; tokenised type (`--text-body`, `--text-section`,
   `--text-meta`, `--text-label`, nothing under 12px); tighter section

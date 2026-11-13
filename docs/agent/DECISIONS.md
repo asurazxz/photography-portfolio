@@ -3,6 +3,17 @@
 This file records decisions that future sessions must preserve. Add new entries
 at the top. Do not rewrite older entries; supersede them with a newer decision.
 
+## 2026-11-13 - Hero fits the first viewport; thinner navbar
+
+Requested by the user; the agent chose the implementation.
+
+- On desktop, the whole hero must be visible on first load, including the
+  "Get in touch" button and the bottom of the photo. Hero spacing, heading
+  size, and photo height scale with viewport height (`vh` and `svh`), and they
+  are measured from `--header-height`.
+- The navbar is thinner. Its vertical padding is
+  `clamp(1rem, 1.5vw, 1.4rem)`, which makes it about 82px tall on desktop.
+
 ## 2026-11-10 - Larger labels; single hero action
 
 Decided by the user.

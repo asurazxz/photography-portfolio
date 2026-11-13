@@ -112,7 +112,7 @@ a {
   justify-content: space-between;
   left: 0;
   mix-blend-mode: difference;
-  padding: clamp(1.5rem, 3vw, 2.6rem) clamp(1.4rem, 4vw, 4rem);
+  padding: clamp(1rem, 1.5vw, 1.4rem) clamp(1.4rem, 4vw, 4rem);
   pointer-events: none;
   position: fixed;
   top: 0;
@@ -157,13 +157,17 @@ a {
 }
 
 .hero {
+  /* Gaps above and below the hero content; the photo height subtracts them
+     so the whole hero fits within the first viewport on desktop. */
+  --hero-top: calc(var(--header-height, 4.5rem) + clamp(1.5rem, 4vh, 3rem));
+  --hero-bottom: clamp(2rem, 5vh, 4rem);
   align-items: end;
   display: grid;
   gap: clamp(2.5rem, 5vw, 5rem);
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   min-height: 100svh;
-  padding-bottom: clamp(4rem, 7vw, 7rem);
-  padding-top: 9rem;
+  padding-bottom: var(--hero-bottom);
+  padding-top: var(--hero-top);
 }
 
 .hero-copy {
@@ -175,7 +179,7 @@ a {
 
 .hero-index > .eyebrow {
   color: #66655f;
-  margin-bottom: clamp(3rem, 8vh, 7rem);
+  margin-bottom: clamp(1.5rem, 5vh, 7rem);
 }
 
 .identity-rule {
@@ -192,16 +196,16 @@ a {
 }
 
 .hero-statement {
-  margin-top: 4rem;
+  margin-top: clamp(1.5rem, 5vh, 4rem);
 }
 
 .hero h1 {
   font-family: var(--font-serif);
-  font-size: clamp(3.2rem, 6.6vw, 7.5rem);
+  font-size: clamp(3.2rem, min(6.6vw, 10vh), 7.5rem);
   font-weight: 400;
   letter-spacing: -0.075em;
   line-height: 0.94;
-  margin: 0 0 2.5rem;
+  margin: 0 0 clamp(1.25rem, 3.5vh, 2.5rem);
 }
 
 .hero h1 span {
@@ -257,8 +261,8 @@ a {
 }
 
 .hero-visual {
-  height: min(80vh, 920px);
-  min-height: 570px;
+  height: min(calc(100svh - var(--hero-top) - var(--hero-bottom)), 920px);
+  min-height: 420px;
   position: relative;
 }
 
@@ -894,7 +898,6 @@ a {
   .hero {
     align-items: start;
     grid-template-columns: 1fr;
-    padding-top: 8rem;
   }
 
   .hero-copy {
@@ -2002,10 +2005,6 @@ body::before {
     pointer-events: none;
   }
 
-  .hero {
-    padding-top: 7rem;
-  }
-
   .archive-slot-2,
   .archive-slot-4,
   .archive-slot-5,
@@ -2228,7 +2227,7 @@ body::before {
   display: flex;
   flex-wrap: wrap;
   gap: 0.9rem;
-  margin-top: 2.5rem;
+  margin-top: clamp(1.5rem, 4vh, 2.5rem);
 }
 
 /* Image triggers and lightbox */
